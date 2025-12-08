@@ -17,8 +17,8 @@ import { FlightsService, AllocationsService } from "@/shared/api";
 import { toast } from "@/shared/lib/hook";
 import { formatEntityDetails } from "@/shared/lib/formatters";
 
-const VOLUME_FETCH_INTERVAL = 10000;
-const FLIGHT_FETCH_INTERVAL = 10000;
+const VOLUME_FETCH_INTERVAL = 1000;
+const FLIGHT_FETCH_INTERVAL = 2000;
 
 export const isOperationalIntent = (
   region: OperationalIntent | Constraint | IdentificationServiceAreaFull,
@@ -164,10 +164,10 @@ export const MapDataService = () => {
       const fetchedVolumes: Array<
         OperationalIntent | Constraint | IdentificationServiceAreaFull
       > = [
-          ...res.constraints,
-          ...res.operational_intents,
-          ...res.identification_service_areas,
-        ];
+        ...res.constraints,
+        ...res.operational_intents,
+        ...res.identification_service_areas,
+      ];
 
       localVolumes.current = fetchedVolumes.slice();
       setVolumes(fetchedVolumes);

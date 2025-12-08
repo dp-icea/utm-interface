@@ -223,10 +223,11 @@ export const FlightTrackingPanel = () => {
           {flightDetails.map((flight) => (
             <div
               key={flight.id}
-              className={`p-3 rounded-lg border transition-colors ${flight.active
+              className={`p-3 rounded-lg border transition-colors ${
+                flight.active
                   ? "bg-blue-900/30 border-blue-600"
                   : "bg-gray-750 border-gray-600 hover:bg-gray-700"
-                }`}
+              }`}
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
@@ -262,9 +263,6 @@ export const FlightTrackingPanel = () => {
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <div className="flex items-center space-x-1">
                   <span>Type: {flight.aircraftType}</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <span>Pressure: {flight.pressure_altitude}%</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <span>Speed: {flight.speed.toFixed(3)}</span>
