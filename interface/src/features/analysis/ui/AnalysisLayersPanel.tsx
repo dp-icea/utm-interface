@@ -22,6 +22,7 @@ const OpeaControls = ({ layer }: { layer: AnalysisLayer }) => {
   const counts = useMemo(() => {
     const c: Record<string, number> = {};
     layer.features.forEach((f) => {
+      if (f.properties.category !== "opea") return;
       const code = f.properties.attributes.aixm_code ?? "OTHER";
       c[code] = (c[code] ?? 0) + 1;
     });
@@ -73,7 +74,8 @@ const TallestList = ({ layer }: { layer: AnalysisLayer }) => {
   const { selectFeature, flyTo } = useAnalysis();
   const tallest = useMemo(
     () =>
-      [...layer.features]
+      layer.features
+        .filter((f) => f.properties.category === "opea")
         .sort((a, b) => (b.properties.upper?.value ?? 0) - (a.properties.upper?.value ?? 0))
         .slice(0, 8),
     [layer],
@@ -103,7 +105,8 @@ const TallestList = ({ layer }: { layer: AnalysisLayer }) => {
 const LayerRow = ({ layer }: { layer: AnalysisLayer }) => {
   const { toggleLayer, selectFeature, selectedFeatureId, flyTo } = useAnalysis();
   const [open, setOpen] = useState(false);
-  const isOpea = layer.features.length > 0 && layer.features.every((f) => f.properties.category === "opea");
+  const opeaCount = layer.features.filter((f) => f.properties.category === "opea").length;
+  const isOpea = opeaCount > 0 && opeaCount >= layer.features.length / 2;
   const warnCount = layer.features.filter((f) => f.properties.warnings.length > 0).length;
 
   return (
