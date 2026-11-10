@@ -20,6 +20,29 @@ export interface ProbeReading {
   pinned: boolean;
 }
 
+export type ToolMode = "none" | "measure";
+
+/** A 3D point: [lng, lat, heightW84]. */
+export type Point3 = [number, number, number];
+
+export interface Measurement {
+  a: Point3;
+  b: Point3;
+}
+
+/** Closest-approach line shown on the map for a clearance row. */
+export interface ClearanceHighlight {
+  a: Point3;
+  b: Point3;
+  label: string;
+  conflict: boolean;
+}
+
+export interface ResolvedLimits {
+  lowerW84: number;
+  upperW84: number;
+}
+
 export interface OpeaFilter {
   /** aixm_code values to hide. */
   hiddenTypes: string[];
@@ -54,6 +77,20 @@ export interface AnalysisState {
   probe: ProbeReading | null;
   setProbe: (reading: ProbeReading | null) => void;
   setFlyToHandler: (handler: ((featureId: string) => void) | null) => void;
+
+  removeFeature: (featureId: string) => void;
+  toolMode: ToolMode;
+  setToolMode: (mode: ToolMode) => void;
+  measurement: Measurement | null;
+  setMeasurement: (m: Measurement | null) => void;
+  clearanceHighlight: ClearanceHighlight | null;
+  setClearanceHighlight: (h: ClearanceHighlight | null) => void;
+  /** Rendered W84 limits of a feature (uses the renderer's terrain cache). */
+  resolveLimits: (featureId: string) => ResolvedLimits | undefined;
+  /** Bumped whenever rendered limits may have changed (terrain samples). */
+  limitsVersion: number;
+  bumpLimitsVersion: () => void;
+  setResolver: (resolver: ((featureId: string) => ResolvedLimits | undefined) | null) => void;
 }
 
 export const AnalysisContext = createContext<AnalysisState | undefined>(undefined);

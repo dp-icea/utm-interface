@@ -1,8 +1,9 @@
-import { X, Crosshair } from "lucide-react";
+import { X, Crosshair, Trash2 } from "lucide-react";
 import type { AltitudeLimit, Datum, FeatureCategory } from "@/shared/model";
 import { useAnalysis } from "../model/use-analysis";
 import { FT_PER_M } from "../lib/altitude";
 import { CATEGORY_COLORS } from "../lib/analysis-entity-manager";
+import { ClearancePanel } from "./ClearancePanel";
 
 const DATUMS: Datum[] = ["MSL", "W84", "AGL"];
 const CATEGORIES = Object.keys(CATEGORY_COLORS) as FeatureCategory[];
@@ -68,7 +69,8 @@ const LimitEditor = ({
 );
 
 export const FeatureInspector = () => {
-  const { selectedFeatureId, findFeature, updateFeature, selectFeature, flyTo, scenario } = useAnalysis();
+  const { selectedFeatureId, findFeature, updateFeature, selectFeature, flyTo, scenario, removeFeature } =
+    useAnalysis();
   if (!selectedFeatureId) return null;
   const found = findFeature(selectedFeatureId);
   if (!found) return null;
@@ -95,6 +97,15 @@ export const FeatureInspector = () => {
         />
         <button title="Fly to" onClick={() => flyTo(feature.id)} className="text-gray-400 hover:text-white pt-1">
           <Crosshair className="h-4 w-4" />
+        </button>
+        <button
+          title="Delete feature"
+          onClick={() => {
+            if (confirm(`Delete "${p.name}" from the scenario?`)) removeFeature(feature.id);
+          }}
+          className="text-gray-400 hover:text-red-400 pt-1"
+        >
+          <Trash2 className="h-4 w-4" />
         </button>
         <button title="Close" onClick={() => selectFeature(null)} className="text-gray-400 hover:text-white pt-1">
           <X className="h-4 w-4" />
@@ -155,6 +166,10 @@ export const FeatureInspector = () => {
         onChange={(e) => updateFeature(feature.id, { notes: e.target.value })}
       />
       {p.source && <div className="text-[10px] text-gray-500 break-words">{p.source}</div>}
+
+      <div className="border-t border-gray-700 pt-2">
+        <ClearancePanel feature={feature} />
+      </div>
     </div>
   );
 };

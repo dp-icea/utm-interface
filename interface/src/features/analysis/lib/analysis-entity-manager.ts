@@ -1,6 +1,6 @@
 import * as Cesium from "cesium";
 import type { AnalysisFeature, FeatureCategory, Scenario } from "@/shared/model";
-import type { OpeaFilter } from "../model/state";
+import type { OpeaFilter, ResolvedLimits } from "../model/state";
 import {
   centroid,
   formatLimit,
@@ -95,6 +95,8 @@ export class AnalysisEntityManager {
   private pendingTerrain = new Set<string>();
   private removeSelectionListener: Cesium.Event.RemoveCallback;
   private onTerrainLoaded: () => void = () => {};
+  private features = new Map<string, AnalysisFeature>();
+  private geoid = 0;
 
   constructor(viewer: Cesium.Viewer, onSelect: (featureId: string | null) => void) {
     this.viewer = viewer;
@@ -152,6 +154,9 @@ export class AnalysisEntityManager {
   render(scenario: Scenario | null, opeaFilter: OpeaFilter, selectedId: string | null) {
     const geoid = scenario?.geoid_undulation_m ?? 0;
     const wanted = new Set<string>();
+    this.geoid = geoid;
+    this.features.clear();
+    scenario?.layers.forEach((l) => l.features.forEach((f) => this.features.set(f.id, f)));
 
     if (scenario) {
       const visible = scenario.layers
@@ -208,6 +213,14 @@ export class AnalysisEntityManager {
       if (!cur || (f.properties.upper?.value ?? 0) > (cur.properties.upper?.value ?? 0)) best.set(key, f);
     }
     return new Set([...best.values()].map((f) => f.id));
+  }
+
+  /** W84 limits as rendered, or undefined if terrain isn't sampled yet. */
+  resolve(featureId: string): ResolvedLimits | undefined {
+    const f = this.features.get(featureId);
+    if (!f) return undefined;
+    const vol = resolveVolume(f, { terrainW84: this.terrain.get(f.id), geoidUndulation: this.geoid });
+    return vol ? { lowerW84: vol.lowerW84, upperW84: vol.upperW84 } : undefined;
   }
 
   flyTo(featureId: string) {

@@ -7,7 +7,16 @@ import {
   type ReactNode,
 } from "react";
 import { ScenariosService } from "@/shared/api";
-import { AnalysisContext, type BaseScene, type OpeaFilter, type ProbeReading } from "./state";
+import {
+  AnalysisContext,
+  type BaseScene,
+  type ClearanceHighlight,
+  type Measurement,
+  type OpeaFilter,
+  type ProbeReading,
+  type ResolvedLimits,
+  type ToolMode,
+} from "./state";
 import type {
   AnalysisFeature,
   AnalysisFeatureProperties,
@@ -148,6 +157,32 @@ export const AnalysisProvider = ({ children }: { children: ReactNode }) => {
     [mutate],
   );
 
+  const removeFeature = useCallback(
+    (featureId: string) => {
+      mutate((s) => ({
+        ...s,
+        layers: s.layers.map((l) => ({ ...l, features: l.features.filter((f) => f.id !== featureId) })),
+      }));
+      selectFeature((cur) => (cur === featureId ? null : cur));
+    },
+    [mutate],
+  );
+
+  const [toolMode, setToolMode] = useState<ToolMode>("none");
+  const [measurement, setMeasurement] = useState<Measurement | null>(null);
+  const [clearanceHighlight, setClearanceHighlight] = useState<ClearanceHighlight | null>(null);
+
+  const [limitsVersion, setLimitsVersion] = useState(0);
+  const bumpLimitsVersion = useCallback(() => setLimitsVersion((v) => v + 1), []);
+  const resolver = useRef<((featureId: string) => ResolvedLimits | undefined) | null>(null);
+  const resolveLimits = useCallback((id: string) => resolver.current?.(id), []);
+  const setResolver = useCallback((r: ((featureId: string) => ResolvedLimits | undefined) | null) => {
+    resolver.current = r;
+  }, []);
+
+  // A highlight belongs to the selected feature's clearance table.
+  useEffect(() => setClearanceHighlight(null), [selectedFeatureId]);
+
   const featureIndex = useMemo(() => {
     const idx = new Map<string, { feature: AnalysisFeature; layerId: string }>();
     scenario?.layers.forEach((l) => l.features.forEach((f) => idx.set(f.id, { feature: f, layerId: l.id })));
@@ -190,6 +225,17 @@ export const AnalysisProvider = ({ children }: { children: ReactNode }) => {
         setProbeEnabled,
         probe,
         setProbe,
+        removeFeature,
+        toolMode,
+        setToolMode,
+        measurement,
+        setMeasurement,
+        clearanceHighlight,
+        setClearanceHighlight,
+        resolveLimits,
+        setResolver,
+        limitsVersion,
+        bumpLimitsVersion,
       }}
     >
       {children}

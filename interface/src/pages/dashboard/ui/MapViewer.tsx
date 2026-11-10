@@ -7,6 +7,7 @@ import {
   AnalysisLayerRenderer,
   HeightProbeController,
   SceneLayersController,
+  ToolController,
 } from "@/features/analysis";
 
 export class MapViewer extends Component {
@@ -41,6 +42,7 @@ export class MapViewer extends Component {
           <AnalysisLayerRenderer />
           <SceneLayersController />
           <HeightProbeController />
+          <ToolController />
           <ImageryLayer
             imageryProvider={
               new Cesium.OpenStreetMapImageryProvider({

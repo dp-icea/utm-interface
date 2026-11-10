@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { ChevronDown, ChevronRight, Layers, Ruler, Save, Upload } from "lucide-react";
+import { ChevronDown, ChevronRight, Layers, Ruler, Save, Spline, Upload } from "lucide-react";
 import { Checkbox } from "@/shared/ui/checkbox";
 import { Badge } from "@/shared/ui/badge";
 import { useToast } from "@/shared/lib/hook";
@@ -163,7 +163,11 @@ export const AnalysisLayersPanel = () => {
     setBaseScene,
     probeEnabled,
     setProbeEnabled,
+    toolMode,
+    setToolMode,
   } = useAnalysis();
+  const toolBtn = (active: boolean) =>
+    `flex items-center gap-1 text-xs px-2 py-1 rounded border ${active ? "border-blue-500 bg-blue-600 text-white" : "border-gray-600 text-gray-300 hover:bg-gray-700"}`;
   const { toast } = useToast();
   const fileInput = useRef<HTMLInputElement>(null);
   const [showImportWarnings, setShowImportWarnings] = useState(false);
@@ -213,12 +217,25 @@ export const AnalysisLayersPanel = () => {
         <button
           title="Height probe"
           onClick={() => setProbeEnabled(!probeEnabled)}
-          className={`flex items-center gap-1 text-xs px-2 py-1 rounded border ${probeEnabled ? "border-blue-500 bg-blue-600 text-white" : "border-gray-600 text-gray-300 hover:bg-gray-700"}`}
+          className={toolBtn(probeEnabled)}
         >
           <Ruler className="h-3 w-3" />
           Probe
         </button>
       </div>
+
+      {scenario && (
+        <div className="flex gap-2">
+          <button
+            title="Measure between two points (Esc to stop)"
+            onClick={() => setToolMode(toolMode === "measure" ? "none" : "measure")}
+            className={toolBtn(toolMode === "measure")}
+          >
+            <Spline className="h-3 w-3" />
+            Measure
+          </button>
+        </div>
+      )}
 
       <div className="flex gap-2">
         <select

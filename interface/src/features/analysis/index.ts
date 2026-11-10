@@ -5,3 +5,5 @@ export { AnalysisLayersPanel } from "./ui/AnalysisLayersPanel";
 export { SceneLayersController } from "./ui/SceneLayersController";
 export { HeightProbeController } from "./ui/HeightProbeController";
 export { HeightProbeHud } from "./ui/HeightProbeHud";
+export { ToolController } from "./ui/ToolController";
+export { ToolHud } from "./ui/ToolHud";

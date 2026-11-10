@@ -4,7 +4,7 @@ import { MapViewer } from "./MapViewer";
 import { SidebarPanel } from "./SidebarPanel";
 import { TimelineBar } from "./TimelineBar";
 import { MapProvider } from "@/shared/lib/map";
-import { AnalysisProvider, HeightProbeHud } from "@/features/analysis";
+import { AnalysisProvider, HeightProbeHud, ToolHud } from "@/features/analysis";
 
 const FloatingClock = () => {
   const [zuluTime, setZuluTime] = useState("");
@@ -46,6 +46,7 @@ export const DashboardPage = () => {
               <MapViewer />
               <FloatingClock />
               <HeightProbeHud />
+              <ToolHud />
             </div>
             <TimelineBar />
           </main>
