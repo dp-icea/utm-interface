@@ -7,6 +7,7 @@ from starlette.responses import StreamingResponse
 from routes.airspace import router as AirspaceRouter
 from routes.constraints import router as ConstraintsRouter
 from routes.health import router as HealthRouter
+from routes.scenarios import router as ScenariosRouter
 from schemas.api import ApiException
 import logging
 
@@ -41,14 +42,14 @@ async def catch_exceptions_middleware(request: Request, call_next):
         logging.info(
             f"[API REQUEST] {request.method} {request.url.path} - "
             f"Headers: {request.headers}, "
-            f"Body: {await request.body()}"
+            f"Body: {(await request.body())[:2000]!r}"
         )
         response = await call_next(request)
         body = b"".join([chunk async for chunk in response.body_iterator])
         logging.info(
             f"[API RESPONSE] {request.method} {request.url.path} - Status:"
             f" {response.status_code}, Headers: {response.headers}, Body:"
-            f"{body}"
+            f"{body[:2000]!r}"
         )
         return StreamingResponse(
             iter([body]),
@@ -85,3 +86,6 @@ app.include_router(
     ConstraintsRouter, tags=["Constraints"], prefix="/constraints"
 )
 app.include_router(HealthRouter, tags=["Health"], prefix="/healthy")
+app.include_router(
+    ScenariosRouter, tags=["Scenarios"], prefix="/scenarios"
+)
