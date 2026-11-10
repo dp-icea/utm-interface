@@ -73,6 +73,9 @@ class Scenario(BaseModel):
     id: str
     name: str
     description: str = ""
+    # EGM2008 geoid undulation (W84 = MSL + N) applied to MSL limits.
+    # None = not set yet; the viewer then treats MSL as W84 and warns.
+    geoid_undulation_m: Optional[float] = None
     created_at: datetime = Field(
         default_factory=lambda: datetime.now(timezone.utc)
     )

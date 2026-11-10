@@ -9,7 +9,9 @@ Mapping rules (see docs plan "Airspace Analysis Layers"):
   when present (DECEA FRZ/ZEH exports)
 - points carrying DECEA OPEA SchemaData become ``opea`` obstacles with
   lower = altitude_base and upper = altitude_topo (MSL)
-- GroundOverlays and NetworkLinks are skipped and reported as warnings
+- GroundOverlays are skipped and reported as warnings
+- NetworkLinks are fetched (http/https, size/depth capped) when
+  follow_links=True, otherwise skipped with a warning
 
 Usage: python -m adapters.kml_importer <file.kmz> [scenario_id]
 """
@@ -20,6 +22,7 @@ import json
 import re
 import sys
 import unicodedata
+import urllib.request
 import zipfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -46,7 +49,7 @@ CATEGORY_RULES: list[tuple[re.Pattern, FeatureCategory]] = [
     (re.compile(r"zeh|heliponto|sjci|\bfrz\b", re.I), FeatureCategory.HELIPORT_RESTRICTION),
     (re.compile(r"\bzea\b|\bzad\b|_zea_|sbsj|aer[oó]dromo", re.I), FeatureCategory.AIRPORT_RESTRICTION),
     (re.compile(r"sandbox|zona utm|utm zone|\d+\s*ft\s*agl", re.I), FeatureCategory.UTM_ZONE),
-    (re.compile(r"fence|ground risk|waypoint|proposta|rota", re.I), FeatureCategory.OPERATION),
+    (re.compile(r"fence|ground risk|waypoint|proposta|rota|arena", re.I), FeatureCategory.OPERATION),
     (re.compile(r"\bsbp\b|restri[cç][aã]o|radar|\bsbr\b|\bsbd\b", re.I), FeatureCategory.RESTRICTED_AREA),
 ]
 
@@ -56,6 +59,10 @@ LIMITS_DESC = re.compile(
     re.I,
 )
 TAG_RE = re.compile(r"<[^>]+>")
+
+MAX_LINK_BYTES = 20 * 1024 * 1024
+MAX_LINK_DEPTH = 3
+LINK_TIMEOUT_S = 20
 
 
 def _tag(el: ET.Element) -> str:
@@ -88,11 +95,12 @@ def _strip_html(text: str) -> str:
     return html.unescape(TAG_RE.sub("\n", text)).strip()
 
 
-def _categorize(path: str, name: str) -> FeatureCategory:
-    haystack = f"{path} / {name}"
-    for pattern, category in CATEGORY_RULES:
-        if pattern.search(haystack):
-            return category
+def _categorize(path: list[str], name: str) -> FeatureCategory:
+    """Most specific wins: the feature name, then folders innermost-first."""
+    for haystack in [name, *reversed(path)]:
+        for pattern, category in CATEGORY_RULES:
+            if pattern.search(haystack):
+                return category
     return FeatureCategory.CUSTOM
 
 
@@ -175,8 +183,13 @@ def _to_float(value: Optional[str]) -> Optional[float]:
 
 
 class KmlImporter:
-    def __init__(self, source_name: str):
+    def __init__(self, source_name: str, follow_links: bool = False):
         self.source_name = source_name
+        self.follow_links = follow_links
+        self._visited_links: set[str] = set()
+        self._depth = 0
+        # While walking NetworkLink content, all features go to one layer.
+        self._link_layer: Optional[list[str]] = None
         self.layers: dict[str, AnalysisLayer] = {}
         self.warnings: list[str] = []
         self._ids: set[str] = set()
@@ -203,15 +216,50 @@ class KmlImporter:
                 if msg not in self.warnings:
                     self.warnings.append(msg)
             elif kind == "NetworkLink":
-                href = child.find(f"{KML_NS}Link/{KML_NS}href")
-                self.warnings.append(
-                    "NetworkLink skipped (external content): "
-                    f"{' / '.join(path)} -> {href.text if href is not None else '?'}"
-                )
+                self._network_link(child, path)
             elif kind == "kml":
                 self._walk(child, path)
 
+    def _network_link(self, el: ET.Element, path: list[str]) -> None:
+        href_el = el.find(f"{KML_NS}Link/{KML_NS}href")
+        if href_el is None:
+            href_el = el.find(f"{KML_NS}Url/{KML_NS}href")
+        href = (href_el.text or "").strip() if href_el is not None else ""
+        where = " / ".join(path)
+        if not self.follow_links:
+            self.warnings.append(f"NetworkLink skipped (external content): {where} -> {href or '?'}")
+            return
+        if not href.lower().startswith(("http://", "https://")):
+            self.warnings.append(f"NetworkLink skipped (unsupported href): {where} -> {href or '?'}")
+            return
+        if href in self._visited_links or self._depth >= MAX_LINK_DEPTH:
+            self.warnings.append(f"NetworkLink skipped (loop or too deep): {where} -> {href}")
+            return
+        self._visited_links.add(href)
+        try:
+            req = urllib.request.Request(href, headers={"User-Agent": "utm-observer-kml-importer"})
+            with urllib.request.urlopen(req, timeout=LINK_TIMEOUT_S) as resp:
+                content = resp.read(MAX_LINK_BYTES + 1)
+            if len(content) > MAX_LINK_BYTES:
+                raise ValueError("linked file too large")
+            root = ET.fromstring(read_kml_bytes(href, content))
+        except Exception as e:  # network, zip or XML errors
+            self.warnings.append(f"NetworkLink failed: {where} -> {href}: {e}")
+            return
+        name = _text(el, "name") or "NetworkLink"
+        previous = self._link_layer
+        self._link_layer = previous or path
+        self._depth += 1
+        try:
+            self._walk(root, path + [name])
+        finally:
+            self._depth -= 1
+            self._link_layer = previous
+        self.warnings.append(f"NetworkLink fetched: {where} -> {href}")
+
     def _layer_for(self, path: list[str]) -> AnalysisLayer:
+        if self._link_layer is not None:
+            path = self._link_layer
         # Drop the outer document wrapper(s) so layers read "ZEA IFR SBSJ".
         trimmed = path[2:] if len(path) > 2 else path[-1:]
         name = " / ".join(trimmed) or "root"
@@ -237,7 +285,7 @@ class KmlImporter:
 
         layer = self._layer_for(path)
         path_str = " / ".join(path)
-        category = _categorize(path_str, name)
+        category = _categorize(path, name)
         base_id = pm.get("id") or f"{layer.id}-{_slug(name)}"
 
         if "aixm_code" in data:
@@ -388,8 +436,9 @@ def read_kml_bytes(filename: str, content: bytes) -> bytes:
 
 
 def import_kml(filename: str, content: bytes, scenario_id: Optional[str] = None,
-               name: Optional[str] = None) -> tuple[Scenario, list[str]]:
-    importer = KmlImporter(Path(filename).name)
+               name: Optional[str] = None,
+               follow_links: bool = False) -> tuple[Scenario, list[str]]:
+    importer = KmlImporter(Path(filename).name, follow_links=follow_links)
     layers = importer.parse(read_kml_bytes(filename, content))
     stem = Path(filename).stem
     scenario = Scenario(
@@ -410,19 +459,54 @@ def feature_warnings(layers: Iterable[AnalysisLayer]) -> list[str]:
     return out
 
 
+def merge_new_layers(target: Scenario, source: Scenario) -> list[str]:
+    """Append layers of ``source`` whose id is not in ``target`` (keeps edits)."""
+    existing = {layer.id for layer in target.layers}
+    ids = {f.id for layer in target.layers for f in layer.features}
+    added = []
+    for layer in source.layers:
+        if layer.id in existing:
+            continue
+        for f in layer.features:
+            base, n = f.id, 1
+            while f.id in ids:
+                n += 1
+                f.id = f"{base}-{n}"
+            ids.add(f.id)
+        target.layers.append(layer)
+        added.append(layer.name)
+    return added
+
+
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print(__doc__)
-        sys.exit(1)
-    src = Path(sys.argv[1])
-    sid = sys.argv[2] if len(sys.argv) > 2 else None
-    scenario, warnings = import_kml(src.name, src.read_bytes(), scenario_id=sid)
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Import KML/KMZ into an analysis scenario")
+    parser.add_argument("file")
+    parser.add_argument("scenario_id", nargs="?")
+    parser.add_argument("--follow-links", action="store_true", help="fetch NetworkLink content")
+    parser.add_argument("--merge-into", metavar="ID",
+                        help="append only layers missing from an existing scenario")
+    args = parser.parse_args()
+
+    src = Path(args.file)
+    scenario, warnings = import_kml(src.name, src.read_bytes(), scenario_id=args.scenario_id,
+                                    follow_links=args.follow_links)
     out_dir = Path(__file__).resolve().parent.parent / "data" / "scenarios"
     out_dir.mkdir(parents=True, exist_ok=True)
-    out = out_dir / f"{scenario.id}.json"
-    out.write_text(scenario.model_dump_json(indent=1))
-    print(f"Wrote {out}")
-    for layer in scenario.layers:
-        print(f"  {layer.name}: {len(layer.features)} features")
+
+    if args.merge_into:
+        out = out_dir / f"{args.merge_into}.json"
+        target = Scenario.model_validate_json(out.read_text())
+        added = merge_new_layers(target, scenario)
+        out.write_text(target.model_dump_json(indent=1))
+        print(f"Merged into {out}: {added or 'nothing new'}")
+    else:
+        out = out_dir / f"{scenario.id}.json"
+        out.write_text(scenario.model_dump_json(indent=1))
+        print(f"Wrote {out}")
+        for layer in scenario.layers:
+            print(f"  {layer.name}: {len(layer.features)} features")
     for w in warnings + feature_warnings(scenario.layers):
-        print(f"  ! {w}")
+        if not w.startswith("GroundOverlay"):
+            print(f"  ! {w}")

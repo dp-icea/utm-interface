@@ -1,6 +1,7 @@
 import { ClientList } from "./sidebar/ClientListPanel";
 import { OperationalFiltersPanel } from "./sidebar/OperationalFiltersPanel";
 import { FlightTrackingPanel } from "./sidebar/FlightTrackingPanel";
+import { AnalysisLayersPanel } from "@/features/analysis";
 
 export const SidebarPanel = () => {
   return (
@@ -11,6 +12,7 @@ export const SidebarPanel = () => {
         <OperationalFiltersPanel />
         {/*<NotificationPanel />*/}
         <FlightTrackingPanel />
+        <AnalysisLayersPanel />
       </div>
     </div>
   );

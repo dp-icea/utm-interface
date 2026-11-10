@@ -11,3 +11,4 @@ export * from "./operational-intent.d";
 export * from "./subscription.d";
 export * from "./uss.d";
 export * from "./utm-zone.d";
+export * from "./scenario.d";

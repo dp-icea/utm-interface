@@ -2,6 +2,7 @@
  "id": "dcta-sandbox-v2",
  "name": "SandBOX_UTM_DCTA_v2",
  "description": "Imported from SandBOX_UTM_DCTA_v2.kmz",
+ "geoid_undulation_m": null,
  "created_at": "2026-11-10T16:32:49.131536Z",
  "layers": [
   {
@@ -72,16 +73,20 @@
      },
      "properties": {
       "name": "Restrição SSD",
-      "category": "utm_zone",
-      "lower": null,
-      "upper": null,
+      "category": "restricted_area",
+      "lower": {
+       "value": 0.0,
+       "datum": "AGL"
+      },
+      "upper": {
+       "value": 20.0,
+       "datum": "AGL"
+      },
       "radius_m": null,
       "color": null,
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA",
       "attributes": {},
-      "warnings": [
-       "no_limits: 2D shape; set lower and upper limits"
-      ],
+      "warnings": [],
       "notes": ""
      }
     },
@@ -117,16 +122,20 @@
      },
      "properties": {
       "name": "RADAR",
-      "category": "utm_zone",
-      "lower": null,
-      "upper": null,
+      "category": "restricted_area",
+      "lower": {
+       "value": 0.0,
+       "datum": "AGL"
+      },
+      "upper": {
+       "value": 20.0,
+       "datum": "AGL"
+      },
       "radius_m": null,
       "color": null,
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA",
       "attributes": {},
-      "warnings": [
-       "no_limits: 2D shape; set lower and upper limits"
-      ],
+      "warnings": [],
       "notes": ""
      }
     },
@@ -162,7 +171,7 @@
      },
      "properties": {
       "name": "SBP 409 1000'AGL 939m 3083'",
-      "category": "utm_zone",
+      "category": "restricted_area",
       "lower": null,
       "upper": {
        "value": 905.0,
@@ -263,7 +272,7 @@
      },
      "properties": {
       "name": "rota Alternativa speed",
-      "category": "utm_zone",
+      "category": "operation",
       "lower": null,
       "upper": null,
       "radius_m": null,
@@ -281,7 +290,7 @@
   {
    "id": "frz-sjci-2d",
    "name": "FRZ SJCI (2D)",
-   "visible": true,
+   "visible": false,
    "features": [
     {
      "type": "Feature",
@@ -472,7 +481,7 @@
   {
    "id": "sbsj-iac",
    "name": "SBSJ / IAC",
-   "visible": true,
+   "visible": false,
    "features": [
     {
      "type": "Feature",
@@ -560,7 +569,7 @@
      },
      "properties": {
       "name": "Fence Polygon",
-      "category": "utm_zone",
+      "category": "operation",
       "lower": null,
       "upper": {
        "value": 45.0,
@@ -594,7 +603,7 @@
      },
      "properties": {
       "name": "Waypoints Polyline",
-      "category": "utm_zone",
+      "category": "operation",
       "lower": null,
       "upper": {
        "value": 45.0,
@@ -866,7 +875,7 @@
      },
      "properties": {
       "name": "Ground Risk Polygon",
-      "category": "utm_zone",
+      "category": "operation",
       "lower": null,
       "upper": {
        "value": 35.0,
@@ -887,7 +896,7 @@
   {
    "id": "zea-ifr-sbsj",
    "name": "ZEA IFR SBSJ",
-   "visible": true,
+   "visible": false,
    "features": [
     {
      "type": "Feature",
@@ -1658,7 +1667,7 @@
   {
    "id": "dcta-br-utm-sandbox-kmz-dcta-br-utm-sandbox",
    "name": "DCTA_BR_UTM_SANDBOX.kmz / DCTA_BR_UTM_SANDBOX",
-   "visible": true,
+   "visible": false,
    "features": [
     {
      "type": "Feature",
@@ -41493,7 +41502,7 @@
   {
    "id": "zad-sbsj-rwy16-kmz",
    "name": "ZAD SBSJ RWY16.kmz",
-   "visible": true,
+   "visible": false,
    "features": [
     {
      "type": "Feature",
@@ -41647,6 +41656,294 @@
       "radius_m": null,
       "color": null,
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / ZAD SBSJ RWY16.kmz",
+      "attributes": {},
+      "warnings": [],
+      "notes": ""
+     }
+    }
+   ]
+  },
+  {
+   "id": "arena-dcta-ita",
+   "name": "Arena DCTA ITA",
+   "visible": true,
+   "features": [
+    {
+     "type": "Feature",
+     "id": "arena-dcta-ita-area-a",
+     "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+       [
+        [
+         -45.8714235,
+         -23.2100044
+        ],
+        [
+         -45.872247,
+         -23.2107538
+        ],
+        [
+         -45.8716596,
+         -23.2112863
+        ],
+        [
+         -45.8735049,
+         -23.2128837
+        ],
+        [
+         -45.8722174,
+         -23.2138894
+        ],
+        [
+         -45.8701897,
+         -23.2142887
+        ],
+        [
+         -45.8682906,
+         -23.2140472
+        ],
+        [
+         -45.8630764,
+         -23.2095409
+        ],
+        [
+         -45.864042,
+         -23.2083183
+        ],
+        [
+         -45.8662307,
+         -23.2076033
+        ],
+        [
+         -45.8698356,
+         -23.2109313
+        ],
+        [
+         -45.8703882,
+         -23.2109042
+        ],
+        [
+         -45.8714235,
+         -23.2100044
+        ]
+       ]
+      ]
+     },
+     "properties": {
+      "name": "Area A",
+      "category": "operation",
+      "lower": {
+       "value": 0.0,
+       "datum": "AGL"
+      },
+      "upper": {
+       "value": 40.0,
+       "datum": "AGL"
+      },
+      "radius_m": null,
+      "color": null,
+      "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / Arena DCTA ITA / Arena DCTA / Arena DCTA / Arena ADS",
+      "attributes": {},
+      "warnings": [],
+      "notes": ""
+     }
+    },
+    {
+     "type": "Feature",
+     "id": "arena-dcta-ita-corredor-a",
+     "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+       [
+        [
+         -45.8718365,
+         -23.2103771
+        ],
+        [
+         -45.8715844,
+         -23.2101374
+        ],
+        [
+         -45.8730608,
+         -23.2088536
+        ],
+        [
+         -45.8733116,
+         -23.2090853
+        ],
+        [
+         -45.8718365,
+         -23.2103771
+        ]
+       ]
+      ]
+     },
+     "properties": {
+      "name": "Corredor A",
+      "category": "operation",
+      "lower": {
+       "value": 0.0,
+       "datum": "AGL"
+      },
+      "upper": {
+       "value": 40.0,
+       "datum": "AGL"
+      },
+      "radius_m": null,
+      "color": null,
+      "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / Arena DCTA ITA / Arena DCTA / Arena DCTA / Corredor A",
+      "attributes": {},
+      "warnings": [],
+      "notes": ""
+     }
+    },
+    {
+     "type": "Feature",
+     "id": "arena-dcta-ita-area-b",
+     "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+       [
+        [
+         -45.8734573,
+         -23.2092101
+        ],
+        [
+         -45.8725721,
+         -23.2084127
+        ],
+        [
+         -45.8724085,
+         -23.2072442
+        ],
+        [
+         -45.8733071,
+         -23.2064183
+        ],
+        [
+         -45.8749754,
+         -23.207789
+        ],
+        [
+         -45.8734573,
+         -23.2092101
+        ]
+       ]
+      ]
+     },
+     "properties": {
+      "name": "Area B",
+      "category": "operation",
+      "lower": {
+       "value": 0.0,
+       "datum": "AGL"
+      },
+      "upper": {
+       "value": 40.0,
+       "datum": "AGL"
+      },
+      "radius_m": null,
+      "color": null,
+      "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / Arena DCTA ITA / Arena DCTA / Arena DCTA / Area Lagoa",
+      "attributes": {},
+      "warnings": [],
+      "notes": ""
+     }
+    },
+    {
+     "type": "Feature",
+     "id": "arena-dcta-ita-area-pouso-e-decolagem",
+     "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+       [
+        [
+         -45.872672,
+         -23.2103806
+        ],
+        [
+         -45.872247,
+         -23.2107538
+        ],
+        [
+         -45.8718365,
+         -23.2103722
+        ],
+        [
+         -45.8722643,
+         -23.2099899
+        ],
+        [
+         -45.872672,
+         -23.2103806
+        ]
+       ]
+      ]
+     },
+     "properties": {
+      "name": "Area Pouso e Decolagem",
+      "category": "operation",
+      "lower": {
+       "value": 0.0,
+       "datum": "AGL"
+      },
+      "upper": {
+       "value": 40.0,
+       "datum": "AGL"
+      },
+      "radius_m": null,
+      "color": null,
+      "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / Arena DCTA ITA / Arena DCTA / Arena DCTA / Drone Porto",
+      "attributes": {},
+      "warnings": [],
+      "notes": ""
+     }
+    },
+    {
+     "type": "Feature",
+     "id": "arena-dcta-ita-area-ita-1",
+     "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+       [
+        [
+         -45.8775073,
+         -23.2080256
+        ],
+        [
+         -45.8764559,
+         -23.2089821
+        ],
+        [
+         -45.8761555,
+         -23.2087109
+        ],
+        [
+         -45.8772176,
+         -23.207752
+        ],
+        [
+         -45.8775073,
+         -23.2080256
+        ]
+       ]
+      ]
+     },
+     "properties": {
+      "name": "Area ITA 1",
+      "category": "operation",
+      "lower": {
+       "value": 0.0,
+       "datum": "AGL"
+      },
+      "upper": {
+       "value": 40.0,
+       "datum": "AGL"
+      },
+      "radius_m": null,
+      "color": null,
+      "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / Arena DCTA ITA / Arena DCTA / Arena DCTA / Area ITA",
       "attributes": {},
       "warnings": [],
       "notes": ""

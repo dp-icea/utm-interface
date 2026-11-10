@@ -48,6 +48,7 @@ async def import_scenario(
     scenario_id: Optional[str] = Form(None),
     name: Optional[str] = Form(None),
     save: bool = Form(False),
+    follow_links: bool = Form(False),
     store: ScenarioStore = Depends(get_store),
 ):
     """Parse a KML/KMZ into a scenario. With save=true it is also persisted
@@ -57,7 +58,8 @@ async def import_scenario(
         raise ApiException(status_code=413, message="File too large")
     try:
         scenario, warnings = import_kml(
-            file.filename or "upload.kml", content, scenario_id=scenario_id, name=name
+            file.filename or "upload.kml", content, scenario_id=scenario_id, name=name,
+            follow_links=follow_links,
         )
     except Exception as e:  # malformed XML / zip
         raise ApiException(status_code=400, message=f"Could not parse file: {e}")

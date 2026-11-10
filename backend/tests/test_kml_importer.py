@@ -7,11 +7,13 @@ from adapters.kml_importer import import_kml
 from domain.scenario import Datum, FeatureCategory
 
 KMZ = Path(__file__).resolve().parents[2] / "SandBOX_UTM_DCTA_v2.kmz"
-pytestmark = pytest.mark.skipif(not KMZ.exists(), reason="sample KMZ not present")
+needs_kmz = pytest.mark.skipif(not KMZ.exists(), reason="sample KMZ not present")
 
 
 @pytest.fixture(scope="module")
 def imported():
+    if not KMZ.exists():
+        pytest.skip("sample KMZ not present")
     return import_kml(KMZ.name, KMZ.read_bytes(), scenario_id="test")
 
 
@@ -87,6 +89,7 @@ def test_skipped_content_reported(imported):
     assert any(w.startswith("GroundOverlay skipped") for w in warnings)
 
 
+@needs_kmz
 def test_api_roundtrip(tmp_path):
     from app import app
     from infrastructure.scenario_store import ScenarioStore
@@ -110,3 +113,36 @@ def test_api_roundtrip(tmp_path):
         assert client.put("/scenarios/Bad..id", json={**scenario, "id": "Bad..id"}).status_code == 400
     finally:
         app.dependency_overrides.clear()
+
+
+def test_follow_network_link(monkeypatch):
+    import io
+    import adapters.kml_importer as ki
+
+    linked = b"""<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Arena</name>
+      <Folder><name>Area A</name><Placemark><name>Area A</name><Polygon><outerBoundaryIs>
+      <LinearRing><coordinates>-45.87,-23.21,0 -45.86,-23.21,0 -45.86,-23.20,0 -45.87,-23.21,0
+      </coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark></Folder></Document></kml>"""
+    main = b"""<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>root</name>
+      <Folder><name>Top</name><Document><name>Arena DCTA ITA</name><NetworkLink><name>Arena</name>
+      <Link><href>https://example.com/arena.kml</href></Link></NetworkLink></Document></Folder>
+      </Document></kml>"""
+
+    class Resp(io.BytesIO):
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+    monkeypatch.setattr(ki.urllib.request, "urlopen", lambda req, timeout: Resp(linked))
+
+    skipped, warnings = import_kml("m.kml", main)
+    assert not features(skipped)
+    assert any(w.startswith("NetworkLink skipped") for w in warnings)
+
+    scenario, warnings = import_kml("m.kml", main, follow_links=True)
+    assert [layer.name for layer in scenario.layers] == ["Arena DCTA ITA"]
+    area = by_name(scenario, "Area A")
+    assert area.properties.category == FeatureCategory.OPERATION
+    assert any(w.startswith("NetworkLink fetched") for w in warnings)

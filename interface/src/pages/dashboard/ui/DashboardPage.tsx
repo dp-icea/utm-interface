@@ -4,6 +4,7 @@ import { MapViewer } from "./MapViewer";
 import { SidebarPanel } from "./SidebarPanel";
 import { TimelineBar } from "./TimelineBar";
 import { MapProvider } from "@/shared/lib/map";
+import { AnalysisProvider } from "@/features/analysis";
 
 const FloatingClock = () => {
   const [zuluTime, setZuluTime] = useState("");
@@ -35,6 +36,7 @@ const FloatingClock = () => {
 export const DashboardPage = () => {
   return (
     <MapProvider>
+      <AnalysisProvider>
       <div className="min-h-screen flex w-full bg-gray-900">
         <SidebarPanel />
         <div className="flex flex-1 flex-col">
@@ -48,6 +50,7 @@ export const DashboardPage = () => {
           </main>
         </div>
       </div>
+      </AnalysisProvider>
     </MapProvider>
   );
 };

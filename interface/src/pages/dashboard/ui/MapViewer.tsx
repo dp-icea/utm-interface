@@ -3,6 +3,7 @@ import { Terrain, Ion } from "cesium";
 import * as Cesium from "cesium";
 import { Viewer, ImageryLayer } from "resium";
 import { MapDataService } from "../lib/MapDataService";
+import { AnalysisLayerRenderer } from "@/features/analysis";
 
 export class MapViewer extends Component {
   render() {
@@ -33,6 +34,7 @@ export class MapViewer extends Component {
           imageryProvider={false}
         >
           <MapDataService />
+          <AnalysisLayerRenderer />
           <ImageryLayer
             imageryProvider={
               new Cesium.OpenStreetMapImageryProvider({
