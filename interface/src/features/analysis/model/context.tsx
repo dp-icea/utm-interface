@@ -7,7 +7,7 @@ import {
   type ReactNode,
 } from "react";
 import { ScenariosService } from "@/shared/api";
-import { AnalysisContext, type OpeaFilter } from "./state";
+import { AnalysisContext, type BaseScene, type OpeaFilter, type ProbeReading } from "./state";
 import type {
   AnalysisFeature,
   AnalysisFeatureProperties,
@@ -45,6 +45,19 @@ export const AnalysisProvider = ({ children }: { children: ReactNode }) => {
     hiddenTypes: ["TREE"],
     minHeight: 0,
   });
+
+  const [baseScene, setBaseSceneState] = useState<BaseScene>(
+    () => {
+      const saved = readStorage("analysis-base-scene");
+      return saved === "osm" || saved === "google" ? saved : "terrain";
+    },
+  );
+  const setBaseScene = useCallback((scene: BaseScene) => {
+    setBaseSceneState(scene);
+    writeStorage("analysis-base-scene", scene);
+  }, []);
+  const [probeEnabled, setProbeEnabled] = useState(false);
+  const [probe, setProbe] = useState<ProbeReading | null>(null);
 
   const refreshList = useCallback(async () => {
     try {
@@ -171,6 +184,12 @@ export const AnalysisProvider = ({ children }: { children: ReactNode }) => {
         findFeature,
         flyTo,
         setFlyToHandler,
+        baseScene,
+        setBaseScene,
+        probeEnabled,
+        setProbeEnabled,
+        probe,
+        setProbe,
       }}
     >
       {children}

@@ -1,9 +1,10 @@
 import { useMemo, useRef, useState } from "react";
-import { ChevronDown, ChevronRight, Layers, Save, Upload } from "lucide-react";
+import { ChevronDown, ChevronRight, Layers, Ruler, Save, Upload } from "lucide-react";
 import { Checkbox } from "@/shared/ui/checkbox";
 import { Badge } from "@/shared/ui/badge";
 import { useToast } from "@/shared/lib/hook";
 import type { AnalysisFeature, AnalysisLayer } from "@/shared/model";
+import type { BaseScene } from "../model/state";
 import { useAnalysis } from "../model/use-analysis";
 import { CATEGORY_COLORS, OPEA_COLORS, opeaHeight } from "../lib/analysis-entity-manager";
 import { FeatureInspector } from "./FeatureInspector";
@@ -158,6 +159,10 @@ export const AnalysisLayersPanel = () => {
     importFile,
     save,
     setGeoidUndulation,
+    baseScene,
+    setBaseScene,
+    probeEnabled,
+    setProbeEnabled,
   } = useAnalysis();
   const { toast } = useToast();
   const fileInput = useRef<HTMLInputElement>(null);
@@ -192,6 +197,27 @@ export const AnalysisLayersPanel = () => {
             {dirty ? "Save" : "Saved"}
           </button>
         )}
+      </div>
+
+      <div className="flex gap-2 items-center">
+        <select
+          className={`${inputCls} flex-1 min-w-0`}
+          title="3D layer drawn over the terrain"
+          value={baseScene}
+          onChange={(e) => setBaseScene(e.target.value as BaseScene)}
+        >
+          <option value="terrain">Terrain only</option>
+          <option value="osm">OSM Buildings</option>
+          <option value="google">Google 3D Tiles</option>
+        </select>
+        <button
+          title="Height probe"
+          onClick={() => setProbeEnabled(!probeEnabled)}
+          className={`flex items-center gap-1 text-xs px-2 py-1 rounded border ${probeEnabled ? "border-blue-500 bg-blue-600 text-white" : "border-gray-600 text-gray-300 hover:bg-gray-700"}`}
+        >
+          <Ruler className="h-3 w-3" />
+          Probe
+        </button>
       </div>
 
       <div className="flex gap-2">

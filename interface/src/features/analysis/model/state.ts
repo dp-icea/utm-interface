@@ -6,6 +6,20 @@ import type {
   ScenarioSummary,
 } from "@/shared/model";
 
+export type BaseScene = "terrain" | "osm" | "google";
+
+export interface ProbeReading {
+  lng: number;
+  lat: number;
+  /** Height of whatever is under the cursor (3D tiles, volume or terrain), W84. */
+  surfaceW84: number | undefined;
+  /** Bare terrain height, W84. */
+  terrainW84: number | undefined;
+  /** true when terrainW84 comes from a full-resolution sample (click). */
+  precise: boolean;
+  pinned: boolean;
+}
+
 export interface OpeaFilter {
   /** aixm_code values to hide. */
   hiddenTypes: string[];
@@ -33,6 +47,12 @@ export interface AnalysisState {
   setOpeaFilter: (filter: OpeaFilter) => void;
   findFeature: (id: string) => { feature: AnalysisFeature; layerId: string } | undefined;
   flyTo: (featureId: string) => void;
+  baseScene: BaseScene;
+  setBaseScene: (scene: BaseScene) => void;
+  probeEnabled: boolean;
+  setProbeEnabled: (enabled: boolean) => void;
+  probe: ProbeReading | null;
+  setProbe: (reading: ProbeReading | null) => void;
   setFlyToHandler: (handler: ((featureId: string) => void) | null) => void;
 }
 
