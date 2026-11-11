@@ -25,6 +25,8 @@ import type {
 } from "@/shared/model";
 
 const LAST_SCENARIO_KEY = "analysis-last-scenario";
+/** Scenario opened when the user has no previous selection. */
+const DEFAULT_SCENARIO_ID = "dcta-sandbox-v2";
 
 function readStorage(key: string): string | null {
   try {
@@ -96,7 +98,11 @@ export const AnalysisProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     refreshList();
     const last = readStorage(LAST_SCENARIO_KEY);
-    if (last) loadScenario(last).catch(() => writeStorage(LAST_SCENARIO_KEY, null));
+    const initial = last ?? DEFAULT_SCENARIO_ID;
+    loadScenario(initial).catch(() => {
+      writeStorage(LAST_SCENARIO_KEY, null);
+      if (initial !== DEFAULT_SCENARIO_ID) loadScenario(DEFAULT_SCENARIO_ID).catch(() => {});
+    });
   }, [refreshList, loadScenario]);
 
   const importFile = useCallback(

@@ -32,5 +32,18 @@ export const AnalysisLayerRenderer = () => {
     bumpLimitsVersion();
   }, [scenario, opeaFilter, selectedFeatureId, terrainTick, bumpLimitsVersion]);
 
+  // Frame the scenario once each time a different one is opened (not on edits).
+  const framedId = useRef<string | null>(null);
+  useEffect(() => {
+    const id = scenario?.id ?? null;
+    if (!id) {
+      framedId.current = null;
+      return;
+    }
+    if (framedId.current === id || !manager.current) return;
+    framedId.current = id;
+    manager.current.flyToAll();
+  }, [scenario]);
+
   return null;
 };

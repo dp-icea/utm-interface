@@ -223,6 +223,17 @@ export class AnalysisEntityManager {
     return vol ? { lowerW84: vol.lowerW84, upperW84: vol.upperW84 } : undefined;
   }
 
+  /** Frames every rendered feature of the current scenario. */
+  flyToAll() {
+    const entities = this.dataSource.entities.values;
+    if (entities.length) {
+      this.viewer.flyTo(entities, {
+        duration: 1.5,
+        offset: new Cesium.HeadingPitchRange(0, Cesium.Math.toRadians(-45), 0),
+      });
+    }
+  }
+
   flyTo(featureId: string) {
     const r = this.rendered.get(featureId);
     if (r && r.entities.length) {

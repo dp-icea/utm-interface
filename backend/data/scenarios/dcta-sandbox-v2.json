@@ -8,7 +8,7 @@
   {
    "id": "zona-utm-dcta",
    "name": "Zona UTM DCTA",
-   "visible": false,
+   "visible": true,
    "features": [
     {
      "type": "Feature",
