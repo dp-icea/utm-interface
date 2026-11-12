@@ -427,7 +427,7 @@
        "datum": "MSL"
       },
       "radius_m": null,
-      "color": "#ff69b4",
+      "color": "#0b89ea",
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / DCTA_BR_UTM_SANDBOX.kmz / DCTA_BR_UTM_SANDBOX",
       "attributes": {},
       "warnings": [
@@ -506,7 +506,7 @@
        "datum": "AGL"
       },
       "radius_m": null,
-      "color": null,
+      "color": "#facc15",
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / BR-UTM Proposta SpeedBird",
       "attributes": {},
       "warnings": [
@@ -540,7 +540,7 @@
        "datum": "AGL"
       },
       "radius_m": null,
-      "color": null,
+      "color": "#facc15",
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / BR-UTM Proposta SpeedBird",
       "attributes": {},
       "warnings": [
@@ -644,7 +644,7 @@
        "datum": "AGL"
       },
       "radius_m": null,
-      "color": null,
+      "color": "#facc15",
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / BR-UTM Proposta SpeedBird",
       "attributes": {},
       "warnings": [
@@ -812,7 +812,7 @@
        "datum": "AGL"
       },
       "radius_m": null,
-      "color": null,
+      "color": "#facc15",
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / BR-UTM Proposta SpeedBird",
       "attributes": {},
       "warnings": [
@@ -902,7 +902,7 @@
        "datum": "AGL"
       },
       "radius_m": null,
-      "color": null,
+      "color": "#facc15",
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / Arena DCTA ITA / Arena DCTA / Arena DCTA / Arena ADS",
       "attributes": {},
       "warnings": [],
@@ -951,7 +951,7 @@
        "datum": "AGL"
       },
       "radius_m": null,
-      "color": null,
+      "color": "#facc15",
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / Arena DCTA ITA / Arena DCTA / Arena DCTA / Corredor A",
       "attributes": {},
       "warnings": [],
@@ -1004,7 +1004,7 @@
        "datum": "AGL"
       },
       "radius_m": null,
-      "color": null,
+      "color": "#facc15",
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / Arena DCTA ITA / Arena DCTA / Arena DCTA / Area Lagoa",
       "attributes": {},
       "warnings": [],
@@ -1053,7 +1053,7 @@
        "datum": "AGL"
       },
       "radius_m": null,
-      "color": null,
+      "color": "#facc15",
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / Arena DCTA ITA / Arena DCTA / Arena DCTA / Drone Porto",
       "attributes": {},
       "warnings": [],
@@ -1102,7 +1102,7 @@
        "datum": "AGL"
       },
       "radius_m": null,
-      "color": null,
+      "color": "#facc15",
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / Arena DCTA ITA / Arena DCTA / Arena DCTA / Area ITA",
       "attributes": {},
       "warnings": [],
@@ -39972,7 +39972,7 @@
        "datum": "AGL"
       },
       "radius_m": null,
-      "color": null,
+      "color": "#ef4444",
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA / FRZ SJCI (2D)",
       "attributes": {
        "adhp": "SJCI",
@@ -40948,7 +40948,7 @@
       "lower": null,
       "upper": null,
       "radius_m": null,
-      "color": null,
+      "color": "#ef4444",
       "source": "SandBOX_UTM_DCTA_v2.kmz: SandBOX_UTM_DCTA.kmz / SandBOX_UTM_DCTA",
       "attributes": {},
       "warnings": [],
