@@ -17,6 +17,8 @@ import { LocalProjection, type XY } from "@/features/analysis/lib/geometry";
 const R = 6378137;
 const RAD = Math.PI / 180;
 
+/** Minimum horizontal turn radius (m); corners are rounded with arcs. */
+export const DEFAULT_TURN_RADIUS: Record<SimKind, number> = { drone: 0, helicopter: 250, plane: 900 };
 export const DEFAULT_CLIMB: Record<SimKind, number> = { drone: 3, helicopter: 5, plane: 8 };
 const DENSIFY_STEP: Record<SimKind, number> = { drone: 5, helicopter: 25, plane: 30 };
 
@@ -150,8 +152,68 @@ function orbitKeys(leg: SimOrbitLeg): KeyPoint[] {
   return out;
 }
 
-/** Expand route legs into key points. Unknown feature references are skipped. */
+function lerpHeight(a: AltitudeLimit, b: AltitudeLimit, f: number): AltitudeLimit {
+  if (a.datum === b.datum) return { value: a.value + (b.value - a.value) * f, datum: a.datum };
+  return f < 0.5 ? a : b;
+}
+
+/**
+ * Replace each sharp corner with a circular arc (fillet) of `radius`, so
+ * aircraft turn progressively. Corners with a hold, or next to vertical-only
+ * segments (takeoff/landing), are left untouched. The radius shrinks when the
+ * neighbouring segments are too short for it.
+ */
+export function smoothCorners(keys: KeyPoint[], radius: number): KeyPoint[] {
+  if (radius <= 0 || keys.length < 3) return keys;
+  const out: KeyPoint[] = [keys[0]];
+  for (let i = 1; i < keys.length - 1; i++) {
+    const [p, c, n] = [keys[i - 1], keys[i], keys[i + 1]];
+    const proj = new LocalProjection(c.lng, c.lat);
+    const a = proj.toXY([p.lng, p.lat]);
+    const b = proj.toXY([n.lng, n.lat]);
+    const la = Math.hypot(a[0], a[1]);
+    const lb = Math.hypot(b[0], b[1]);
+    if (c.hold_s > 0 || la < 1 || lb < 1) {
+      out.push(c);
+      continue;
+    }
+    const ua: XY = [-a[0] / la, -a[1] / la]; // incoming direction
+    const ub: XY = [b[0] / lb, b[1] / lb]; // outgoing direction
+    const turn = Math.acos(Math.max(-1, Math.min(1, ua[0] * ub[0] + ua[1] * ub[1])));
+    if (turn < 3 * RAD) {
+      out.push(c);
+      continue;
+    }
+    const tanHalf = Math.tan(turn / 2);
+    const d = Math.min(radius * tanHalf, 0.45 * la, 0.45 * lb);
+    const r = d / tanHalf;
+    const start: XY = [-ua[0] * d, -ua[1] * d];
+    const left = ua[0] * ub[1] - ua[1] * ub[0] > 0;
+    const normal: XY = left ? [-ua[1], ua[0]] : [ua[1], -ua[0]];
+    const center: XY = [start[0] + normal[0] * r, start[1] + normal[1] * r];
+    const a0 = Math.atan2(start[1] - center[1], start[0] - center[0]);
+    const sweep = left ? turn : -turn;
+    const steps = Math.max(2, Math.ceil(turn / (5 * RAD)));
+    const hIn = lerpHeight(p.height, c.height, 1 - d / la);
+    const hOut = lerpHeight(c.height, n.height, d / lb);
+    for (let s = 0; s <= steps; s++) {
+      const f = s / steps;
+      const ang = a0 + sweep * f;
+      const [lng, lat] = proj.toLngLat([center[0] + r * Math.cos(ang), center[1] + r * Math.sin(ang)]);
+      const height = f < 0.5 ? lerpHeight(hIn, c.height, f * 2) : lerpHeight(c.height, hOut, (f - 0.5) * 2);
+      out.push({ lng, lat, height, hold_s: 0, speed: c.speed, phase: c.phase });
+    }
+  }
+  out.push(keys[keys.length - 1]);
+  return out;
+}
+
+/** Expand route legs into key points (corners rounded). Unknown feature references are skipped. */
 export function expandRoute(entity: SimEntity, features: Map<string, AnalysisFeature>): KeyPoint[] {
+  return smoothCorners(expandLegs(entity, features), entity.turn_radius_m ?? DEFAULT_TURN_RADIUS[entity.kind]);
+}
+
+function expandLegs(entity: SimEntity, features: Map<string, AnalysisFeature>): KeyPoint[] {
   const out: KeyPoint[] = [];
   for (const leg of entity.route) {
     if (leg.type === "waypoint") {

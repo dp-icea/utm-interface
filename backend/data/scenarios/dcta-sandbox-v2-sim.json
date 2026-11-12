@@ -3,7 +3,7 @@
  "name": "Sandbox UTM DCTA (Sim)",
  "description": "Sandbox UTM DCTA with simulated drones, planes and helicopters.",
  "geoid_undulation_m": null,
- "created_at": "2026-11-12T18:11:12.311688Z",
+ "created_at": "2026-11-12T18:59:10.458060Z",
  "layers": [],
  "base_scenario_id": "dcta-sandbox-v2",
  "simulation": {
@@ -475,8 +475,8 @@
     "route": [
      {
       "type": "waypoint",
-      "lng": -45.9391189,
-      "lat": -23.1543492,
+      "lng": -45.9408078,
+      "lat": -23.1563526,
       "height": {
        "value": 1130,
        "datum": "MSL"
@@ -484,8 +484,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.9060994,
-      "lat": -23.1874646,
+      "lng": -45.9062639,
+      "lat": -23.1881273,
       "height": {
        "value": 910,
        "datum": "MSL"
@@ -493,8 +493,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8895897,
-      "lat": -23.2040223,
+      "lng": -45.8889919,
+      "lat": -23.2040146,
       "height": {
        "value": 780,
        "datum": "MSL"
@@ -503,8 +503,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8770423,
-      "lat": -23.2166062,
+      "lng": -45.8758653,
+      "lat": -23.216089,
       "height": {
        "value": 690,
        "datum": "MSL"
@@ -513,8 +513,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.87308,
-      "lat": -23.22058,
+      "lng": -45.8696474,
+      "lat": -23.2218085,
       "height": {
        "value": 0,
        "datum": "AGL"
@@ -523,8 +523,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8671365,
-      "lat": -23.2265408,
+      "lng": -45.8641203,
+      "lat": -23.2268924,
       "height": {
        "value": 0,
        "datum": "AGL"
@@ -533,8 +533,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.861193,
-      "lat": -23.2325015,
+      "lng": -45.8579024,
+      "lat": -23.2326119,
       "height": {
        "value": 25,
        "datum": "AGL"
@@ -543,8 +543,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8433625,
-      "lat": -23.2503838,
+      "lng": -45.8406305,
+      "lat": -23.2484992,
       "height": {
        "value": 900,
        "datum": "MSL"
@@ -553,8 +553,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8376669,
-      "lat": -23.2760449,
+      "lng": -45.8337347,
+      "lat": -23.2739103,
       "height": {
        "value": 1100,
        "datum": "MSL"
@@ -562,8 +562,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8622928,
-      "lat": -23.2845942,
+      "lng": -45.8579355,
+      "lat": -23.2834282,
       "height": {
        "value": 1200,
        "datum": "MSL"
@@ -571,8 +571,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.9547272,
-      "lat": -23.1918711,
+      "lng": -45.95464,
+      "lat": -23.1944591,
       "height": {
        "value": 1200,
        "datum": "MSL"
@@ -580,8 +580,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.9736346,
-      "lat": -23.1529639,
+      "lng": -45.9753571,
+      "lat": -23.1563381,
       "height": {
        "value": 1150,
        "datum": "MSL"
@@ -589,8 +589,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.9391189,
-      "lat": -23.1543492,
+      "lng": -45.9408078,
+      "lat": -23.1563526,
       "height": {
        "value": 1130,
        "datum": "MSL"
@@ -615,8 +615,8 @@
     "route": [
      {
       "type": "waypoint",
-      "lng": -45.8994955,
-      "lat": -23.1940877,
+      "lng": -45.8993551,
+      "lat": -23.1944822,
       "height": {
        "value": 830,
        "datum": "MSL"
@@ -624,8 +624,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8829858,
-      "lat": -23.2106454,
+      "lng": -45.8820832,
+      "lat": -23.2103696,
       "height": {
        "value": 720,
        "datum": "MSL"
@@ -634,8 +634,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.87308,
-      "lat": -23.22058,
+      "lng": -45.8696474,
+      "lat": -23.2218085,
       "height": {
        "value": 0,
        "datum": "AGL"
@@ -644,8 +644,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8677969,
-      "lat": -23.2258785,
+      "lng": -45.8648112,
+      "lat": -23.2262569,
       "height": {
        "value": 0,
        "datum": "AGL"
@@ -654,8 +654,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8625138,
-      "lat": -23.2311769,
+      "lng": -45.8592842,
+      "lat": -23.2313409,
       "height": {
        "value": 20,
        "datum": "AGL"
@@ -664,8 +664,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8519476,
-      "lat": -23.2417738,
+      "lng": -45.8496119,
+      "lat": -23.2402378,
       "height": {
        "value": 850,
        "datum": "MSL"
@@ -674,8 +674,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8539938,
-      "lat": -23.2556796,
+      "lng": -45.8510028,
+      "lat": -23.2542118,
       "height": {
        "value": 950,
        "datum": "MSL"
@@ -683,8 +683,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8724274,
-      "lat": -23.2504893,
+      "lng": -45.8696631,
+      "lat": -23.2497575,
       "height": {
        "value": 950,
        "datum": "MSL"
@@ -692,8 +692,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.9054429,
-      "lat": -23.2173739,
+      "lng": -45.9042033,
+      "lat": -23.2179827,
       "height": {
        "value": 950,
        "datum": "MSL"
@@ -702,8 +702,8 @@
      {
       "type": "orbit",
       "center": [
-       -45.9074215,
-       -23.2007635
+       -45.9069602,
+       -23.2014663
       ],
       "radius_m": 1100,
       "height": {
@@ -711,13 +711,13 @@
        "datum": "MSL"
       },
       "turns": 0.5,
-      "start_bearing_deg": 227.5,
+      "start_bearing_deg": 225.02610396182044,
       "clockwise": true
      },
      {
       "type": "waypoint",
-      "lng": -45.8994955,
-      "lat": -23.1940877,
+      "lng": -45.8993551,
+      "lat": -23.1944822,
       "height": {
        "value": 830,
        "datum": "MSL"
@@ -742,8 +742,8 @@
     "route": [
      {
       "type": "waypoint",
-      "lng": -45.87308,
-      "lat": -23.22058,
+      "lng": -45.87172,
+      "lat": -23.219902,
       "height": {
        "value": 0,
        "datum": "AGL"
@@ -753,8 +753,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8658157,
-      "lat": -23.2278654,
+      "lng": -45.8641203,
+      "lat": -23.2268924,
       "height": {
        "value": 0,
        "datum": "AGL"
@@ -763,8 +763,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8598722,
-      "lat": -23.2338262,
+      "lng": -45.8579024,
+      "lat": -23.2326119,
       "height": {
        "value": 30,
        "datum": "AGL"
@@ -773,8 +773,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8400606,
-      "lat": -23.2536954,
+      "lng": -45.8371761,
+      "lat": -23.2516767,
       "height": {
        "value": 1000,
        "datum": "MSL"
@@ -782,8 +782,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8121317,
-      "lat": -23.2484577,
+      "lng": -45.80952,
+      "lat": -23.2453362,
       "height": {
        "value": 1150,
        "datum": "MSL"
@@ -791,8 +791,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8316082,
-      "lat": -23.1824677,
+      "lng": -45.8302485,
+      "lat": -23.1817897,
       "height": {
        "value": 1200,
        "datum": "MSL"
@@ -801,8 +801,8 @@
      {
       "type": "orbit",
       "center": [
-       -45.8654125,
-       -23.1400393
+       -45.8640525,
+       -23.1393613
       ],
       "radius_m": 1500,
       "height": {
@@ -815,8 +815,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8964827,
-      "lat": -23.1614902,
+      "lng": -45.8951226,
+      "lat": -23.1608122,
       "height": {
        "value": 1100,
        "datum": "MSL"
@@ -824,8 +824,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8847813,
-      "lat": -23.1910351,
+      "lng": -45.8834213,
+      "lat": -23.1903571,
       "height": {
        "value": 870,
        "datum": "MSL"
@@ -833,8 +833,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8820507,
-      "lat": -23.2088063,
+      "lng": -45.8806907,
+      "lat": -23.2081283,
       "height": {
        "value": 740,
        "datum": "MSL"
@@ -843,8 +843,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8777027,
-      "lat": -23.2159438,
+      "lng": -45.8765561,
+      "lat": -23.2154535,
       "height": {
        "value": 690,
        "datum": "MSL"
@@ -853,8 +853,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.87308,
-      "lat": -23.22058,
+      "lng": -45.8696474,
+      "lat": -23.2218085,
       "height": {
        "value": 0,
        "datum": "AGL"
@@ -863,8 +863,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8644949,
-      "lat": -23.22919,
+      "lng": -45.860666,
+      "lat": -23.2300699,
       "height": {
        "value": 0,
        "datum": "AGL"
@@ -873,8 +873,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8644949,
-      "lat": -23.22919,
+      "lng": -45.860666,
+      "lat": -23.2300699,
       "height": {
        "value": 0,
        "datum": "AGL"
@@ -883,8 +883,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.87308,
-      "lat": -23.22058,
+      "lng": -45.87172,
+      "lat": -23.219902,
       "height": {
        "value": 0,
        "datum": "AGL"
@@ -931,8 +931,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8697688,
-      "lat": -23.2014461,
+      "lng": -45.879839,
+      "lat": -23.200866,
       "height": {
        "value": 760,
        "datum": "MSL"
@@ -940,8 +940,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8568901,
-      "lat": -23.2103246,
+      "lng": -45.8829193,
+      "lat": -23.2043529,
       "height": {
        "value": 760,
        "datum": "MSL"
@@ -949,17 +949,17 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.848,
-      "lat": -23.205,
+      "lng": -45.8936944,
+      "lat": -23.1964626,
       "height": {
-       "value": 740,
+       "value": 760,
        "datum": "MSL"
       }
      },
      {
       "type": "waypoint",
-      "lng": -45.838,
-      "lat": -23.189,
+      "lng": -45.904415,
+      "lat": -23.1789959,
       "height": {
        "value": 740,
        "datum": "MSL"
@@ -972,7 +972,8 @@
      "volume-de-voo-speedbird",
      "volume-de-voo-ita"
     ],
-    "notes": "SJCI -> Dutra crossing above Zona UTM (ceiling 680 m MSL)."
+    "turn_radius_m": 400,
+    "notes": "SJCI -> over the Speedbird volume (above it) -> smooth right turn."
    },
    {
     "id": "heli-2",

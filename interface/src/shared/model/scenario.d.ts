@@ -112,6 +112,8 @@ export interface SimEntity {
   color?: string | null;
   speed_mps: number;
   climb_mps?: number | null;
+  /** Corner rounding radius (m); default by kind. */
+  turn_radius_m?: number | null;
   start_offset_s: number;
   loop: "pingpong" | "cycle";
   route: SimLeg[];

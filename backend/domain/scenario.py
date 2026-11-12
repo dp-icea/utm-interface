@@ -82,6 +82,7 @@ class SimEntity(BaseModel):
     color: Optional[str] = None
     speed_mps: float
     climb_mps: Optional[float] = None
+    turn_radius_m: Optional[float] = None
     start_offset_s: float = 0.0
     loop: Literal["pingpong", "cycle"] = "cycle"
     route: list[dict[str, Any]] = Field(default_factory=list)
