@@ -5,6 +5,7 @@ import { SidebarPanel } from "./SidebarPanel";
 import { TimelineBar } from "./TimelineBar";
 import { MapProvider } from "@/shared/lib/map";
 import { AnalysisProvider, HeightProbeHud, ToolHud } from "@/features/analysis";
+import { SimulationProvider, SimulationHud } from "@/features/simulation";
 
 const FloatingClock = () => {
   const [zuluTime, setZuluTime] = useState("");
@@ -37,6 +38,7 @@ export const DashboardPage = () => {
   return (
     <MapProvider>
       <AnalysisProvider>
+      <SimulationProvider>
       <div className="min-h-screen flex w-full bg-gray-900">
         <SidebarPanel />
         <div className="flex flex-1 flex-col">
@@ -47,11 +49,13 @@ export const DashboardPage = () => {
               <FloatingClock />
               <HeightProbeHud />
               <ToolHud />
+              <SimulationHud />
             </div>
             <TimelineBar />
           </main>
         </div>
       </div>
+      </SimulationProvider>
       </AnalysisProvider>
     </MapProvider>
   );

@@ -9,6 +9,7 @@ import {
   SceneLayersController,
   ToolController,
 } from "@/features/analysis";
+import { SimulationRenderer } from "@/features/simulation";
 
 export class MapViewer extends Component {
   render() {
@@ -40,6 +41,7 @@ export class MapViewer extends Component {
         >
           <MapDataService />
           <AnalysisLayerRenderer />
+          <SimulationRenderer />
           <SceneLayersController />
           <HeightProbeController />
           <ToolController />

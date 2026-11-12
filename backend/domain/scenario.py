@@ -69,6 +69,33 @@ class AnalysisLayer(BaseModel):
     features: list[AnalysisFeature] = Field(default_factory=list)
 
 
+class SimEntity(BaseModel):
+    """A simulated aircraft. Routes are a list of legs, expanded by the viewer:
+    {"type": "waypoint", "lng", "lat" | "at_feature", "height", "hold_s"?, "speed_mps"?}
+    {"type": "lawnmower", "area", "height", "spacing_m", "inset_m"?, "sortie"?, "sorties"?}
+    {"type": "orbit", "center", "radius_m", "height", "turns"?, "start_bearing_deg"?, "clockwise"?}
+    """
+
+    id: str
+    kind: Literal["drone", "helicopter", "plane"]
+    callsign: str
+    color: Optional[str] = None
+    speed_mps: float
+    climb_mps: Optional[float] = None
+    start_offset_s: float = 0.0
+    loop: Literal["pingpong", "cycle"] = "cycle"
+    route: list[dict[str, Any]] = Field(default_factory=list)
+    # Drones: feature ids whose union the drone must stay inside.
+    conformance_volume_ids: list[str] = Field(default_factory=list)
+    # Manned aircraft: layer ids whose volumes the aircraft must not enter.
+    avoid_layer_ids: list[str] = Field(default_factory=list)
+    notes: str = ""
+
+
+class Simulation(BaseModel):
+    entities: list[SimEntity] = Field(default_factory=list)
+
+
 class Scenario(BaseModel):
     id: str
     name: str
@@ -80,6 +107,10 @@ class Scenario(BaseModel):
         default_factory=lambda: datetime.now(timezone.utc)
     )
     layers: list[AnalysisLayer] = Field(default_factory=list)
+    # Inherit layers (and geoid) from another scenario; own layers with the
+    # same id override the base ones.
+    base_scenario_id: Optional[str] = None
+    simulation: Optional[Simulation] = None
 
 
 class ScenarioSummary(BaseModel):
@@ -89,3 +120,4 @@ class ScenarioSummary(BaseModel):
     created_at: datetime
     layer_count: int
     feature_count: int
+    has_simulation: bool = False

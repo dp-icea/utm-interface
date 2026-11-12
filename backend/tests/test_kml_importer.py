@@ -146,3 +146,48 @@ def test_follow_network_link(monkeypatch):
     area = by_name(scenario, "Area A")
     assert area.properties.category == FeatureCategory.OPERATION
     assert any(w.startswith("NetworkLink fetched") for w in warnings)
+
+
+# --- Scenario inheritance (base_scenario_id) -------------------------------
+
+def _scenario_with_layers(**kw):
+    from domain.scenario import AnalysisFeature, AnalysisLayer, FeatureProperties, Geometry, Scenario
+
+    def layer(lid, name):
+        return AnalysisLayer(
+            id=lid,
+            name=name,
+            features=[AnalysisFeature(id=f"{lid}-f", geometry=Geometry(type="Point", coordinates=[0, 0]),
+                                      properties=FeatureProperties(name=name))],
+        )
+
+    return Scenario(layers=[layer("a", "A"), layer("b", "B")], **kw)
+
+
+def test_store_inherits_base_layers(tmp_path):
+    import json
+    from domain.scenario import SimEntity, Simulation
+    from infrastructure.scenario_store import ScenarioStore
+
+    store = ScenarioStore(tmp_path)
+    store.save(_scenario_with_layers(id="base", name="Base", geoid_undulation_m=-3.5))
+    sim = _scenario_with_layers(
+        id="sim", name="Sim", base_scenario_id="base",
+        simulation=Simulation(entities=[SimEntity(id="d1", kind="drone", callsign="D1", speed_mps=10)]),
+    )
+    sim.layers[1].name = "B override"
+    store.save(sim)
+
+    # Only the changed layer is written; geoid is not copied.
+    raw = json.loads((tmp_path / "sim.json").read_text())
+    assert [l["id"] for l in raw["layers"]] == ["b"]
+    assert raw["geoid_undulation_m"] is None
+
+    got = store.get("sim")
+    assert [l.name for l in got.layers] == ["A", "B override"]
+    assert got.geoid_undulation_m == -3.5
+    assert got.simulation.entities[0].callsign == "D1"
+
+    summary = {s.id: s for s in store.list()}
+    assert summary["sim"].layer_count == 2 and summary["sim"].has_simulation
+    assert not summary["base"].has_simulation

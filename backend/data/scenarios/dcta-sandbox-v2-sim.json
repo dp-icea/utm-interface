@@ -1,0 +1,1054 @@
+{
+ "id": "dcta-sandbox-v2-sim",
+ "name": "Sandbox UTM DCTA (Sim)",
+ "description": "Sandbox UTM DCTA with simulated drones, planes and helicopters.",
+ "geoid_undulation_m": null,
+ "created_at": "2026-11-12T18:11:12.311688Z",
+ "layers": [],
+ "base_scenario_id": "dcta-sandbox-v2",
+ "simulation": {
+  "entities": [
+   {
+    "id": "speedbird-1",
+    "kind": "drone",
+    "callsign": "SPEEDBIRD",
+    "speed_mps": 15,
+    "climb_mps": 3,
+    "start_offset_s": 0,
+    "loop": "pingpong",
+    "route": [
+     {
+      "type": "waypoint",
+      "lng": -45.8809353871855,
+      "lat": -23.19926637559486,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "hold_s": 20,
+      "phase": "hold"
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8809353871855,
+      "lat": -23.19926637559486,
+      "height": {
+       "value": 40,
+       "datum": "AGL"
+      },
+      "phase": "takeoff"
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8766878360242,
+      "lat": -23.20538849148114,
+      "height": {
+       "value": 40,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8766878360242,
+      "lat": -23.20538849148114,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "hold_s": 30,
+      "phase": "landing"
+     }
+    ],
+    "conformance_volume_ids": [
+     "br-utm-proposta-speedbird-fence-polygon"
+    ],
+    "notes": "Delivery: mall <-> DCTA drop point along the Speedbird waypoints."
+   },
+   {
+    "id": "ita-1",
+    "kind": "drone",
+    "callsign": "ITA-1",
+    "speed_mps": 10,
+    "climb_mps": 2.5,
+    "start_offset_s": 0,
+    "loop": "cycle",
+    "route": [
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "hold_s": 20,
+      "phase": "hold"
+     },
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      },
+      "phase": "takeoff"
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8719362,
+      "lat": -23.2106565,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "lawnmower",
+      "area": "arena-dcta-ita-area-a",
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      },
+      "spacing_m": 45,
+      "inset_m": 12,
+      "sortie": 0,
+      "sorties": 3,
+      "angle_deg": 45,
+      "via": [
+       [
+        -45.8705,
+        -23.2117
+       ]
+      ]
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8719362,
+      "lat": -23.2106565,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "phase": "landing",
+      "hold_s": 25
+     },
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      },
+      "phase": "takeoff"
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8719362,
+      "lat": -23.2106565,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "lawnmower",
+      "area": "arena-dcta-ita-area-a",
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      },
+      "spacing_m": 45,
+      "inset_m": 12,
+      "sortie": 1,
+      "sorties": 3,
+      "angle_deg": 45,
+      "via": [
+       [
+        -45.8705,
+        -23.2117
+       ]
+      ]
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8719362,
+      "lat": -23.2106565,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "phase": "landing",
+      "hold_s": 25
+     },
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      },
+      "phase": "takeoff"
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8719362,
+      "lat": -23.2106565,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "lawnmower",
+      "area": "arena-dcta-ita-area-a",
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      },
+      "spacing_m": 45,
+      "inset_m": 12,
+      "sortie": 2,
+      "sorties": 3,
+      "angle_deg": 45,
+      "via": [
+       [
+        -45.8705,
+        -23.2117
+       ]
+      ]
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8719362,
+      "lat": -23.2106565,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "phase": "landing",
+      "hold_s": 0
+     }
+    ],
+    "conformance_volume_ids": [
+     "arena-dcta-ita-area-pouso-e-decolagem",
+     "arena-dcta-ita-area-a"
+    ],
+    "notes": "Survey of Area A in 3 sorties with battery swaps in Area Pouso e Decolagem."
+   },
+   {
+    "id": "ita-2",
+    "kind": "drone",
+    "callsign": "ITA-2",
+    "speed_mps": 10,
+    "climb_mps": 2.5,
+    "start_offset_s": 0,
+    "loop": "cycle",
+    "route": [
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "hold_s": 40,
+      "phase": "hold"
+     },
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      },
+      "phase": "takeoff"
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8718465,
+      "lat": -23.2103722,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8717955,
+      "lat": -23.210183,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8731011,
+      "lat": -23.2090437,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8732925,
+      "lat": -23.2088767,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "lawnmower",
+      "area": "arena-dcta-ita-area-b",
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      },
+      "spacing_m": 35,
+      "inset_m": 12,
+      "sortie": 0,
+      "sorties": 1
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8732925,
+      "lat": -23.2088767,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8731011,
+      "lat": -23.2090437,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8717955,
+      "lat": -23.210183,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8718465,
+      "lat": -23.2103722,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "at_feature": "arena-dcta-ita-area-pouso-e-decolagem",
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "phase": "landing"
+     }
+    ],
+    "conformance_volume_ids": [
+     "arena-dcta-ita-area-pouso-e-decolagem",
+     "arena-dcta-ita-corredor-a",
+     "arena-dcta-ita-area-b"
+    ],
+    "notes": "Survey of Area B through Corredor A."
+   },
+   {
+    "id": "ita-3",
+    "kind": "drone",
+    "callsign": "ITA-3",
+    "speed_mps": 8,
+    "climb_mps": 2.5,
+    "start_offset_s": 7,
+    "loop": "pingpong",
+    "route": [
+     {
+      "type": "waypoint",
+      "lng": -45.8772789,
+      "lat": -23.2079645,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "hold_s": 15,
+      "phase": "hold"
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8772789,
+      "lat": -23.2079645,
+      "height": {
+       "value": 25,
+       "datum": "AGL"
+      },
+      "phase": "takeoff"
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8763892,
+      "lat": -23.2087708,
+      "height": {
+       "value": 25,
+       "datum": "AGL"
+      },
+      "hold_s": 5
+     }
+    ],
+    "conformance_volume_ids": [
+     "arena-dcta-ita-area-ita-1"
+    ]
+   },
+   {
+    "id": "plane-1",
+    "kind": "plane",
+    "callsign": "PT-SIM1",
+    "speed_mps": 70,
+    "climb_mps": 8,
+    "start_offset_s": 0,
+    "loop": "cycle",
+    "route": [
+     {
+      "type": "waypoint",
+      "lng": -45.9391189,
+      "lat": -23.1543492,
+      "height": {
+       "value": 1130,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.9060994,
+      "lat": -23.1874646,
+      "height": {
+       "value": 910,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8895897,
+      "lat": -23.2040223,
+      "height": {
+       "value": 780,
+       "datum": "MSL"
+      },
+      "speed_mps": 65
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8770423,
+      "lat": -23.2166062,
+      "height": {
+       "value": 690,
+       "datum": "MSL"
+      },
+      "speed_mps": 60
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.87308,
+      "lat": -23.22058,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "speed_mps": 58
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8671365,
+      "lat": -23.2265408,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "speed_mps": 50
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.861193,
+      "lat": -23.2325015,
+      "height": {
+       "value": 25,
+       "datum": "AGL"
+      },
+      "speed_mps": 55
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8433625,
+      "lat": -23.2503838,
+      "height": {
+       "value": 900,
+       "datum": "MSL"
+      },
+      "speed_mps": 65
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8376669,
+      "lat": -23.2760449,
+      "height": {
+       "value": 1100,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8622928,
+      "lat": -23.2845942,
+      "height": {
+       "value": 1200,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.9547272,
+      "lat": -23.1918711,
+      "height": {
+       "value": 1200,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.9736346,
+      "lat": -23.1529639,
+      "height": {
+       "value": 1150,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.9391189,
+      "lat": -23.1543492,
+      "height": {
+       "value": 1130,
+       "datum": "MSL"
+      }
+     }
+    ],
+    "avoid_layer_ids": [
+     "zona-utm-dcta",
+     "volume-de-voo-speedbird",
+     "volume-de-voo-ita"
+    ],
+    "notes": "Straight-in RWY16, touch-and-go, wide right turn back to the final."
+   },
+   {
+    "id": "plane-2",
+    "kind": "plane",
+    "callsign": "PT-SIM2",
+    "speed_mps": 55,
+    "climb_mps": 6,
+    "start_offset_s": 40,
+    "loop": "cycle",
+    "route": [
+     {
+      "type": "waypoint",
+      "lng": -45.8994955,
+      "lat": -23.1940877,
+      "height": {
+       "value": 830,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8829858,
+      "lat": -23.2106454,
+      "height": {
+       "value": 720,
+       "datum": "MSL"
+      },
+      "speed_mps": 50
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.87308,
+      "lat": -23.22058,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "speed_mps": 45
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8677969,
+      "lat": -23.2258785,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "speed_mps": 40
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8625138,
+      "lat": -23.2311769,
+      "height": {
+       "value": 20,
+       "datum": "AGL"
+      },
+      "speed_mps": 45
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8519476,
+      "lat": -23.2417738,
+      "height": {
+       "value": 850,
+       "datum": "MSL"
+      },
+      "speed_mps": 50
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8539938,
+      "lat": -23.2556796,
+      "height": {
+       "value": 950,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8724274,
+      "lat": -23.2504893,
+      "height": {
+       "value": 950,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.9054429,
+      "lat": -23.2173739,
+      "height": {
+       "value": 950,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "orbit",
+      "center": [
+       -45.9074215,
+       -23.2007635
+      ],
+      "radius_m": 1100,
+      "height": {
+       "value": 880,
+       "datum": "MSL"
+      },
+      "turns": 0.5,
+      "start_bearing_deg": 227.5,
+      "clockwise": true
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8994955,
+      "lat": -23.1940877,
+      "height": {
+       "value": 830,
+       "datum": "MSL"
+      }
+     }
+    ],
+    "avoid_layer_ids": [
+     "zona-utm-dcta",
+     "volume-de-voo-speedbird",
+     "volume-de-voo-ita"
+    ],
+    "notes": "Right-hand traffic circuit RWY16 (touch-and-go)."
+   },
+   {
+    "id": "plane-3",
+    "kind": "plane",
+    "callsign": "PT-SIM3",
+    "speed_mps": 65,
+    "climb_mps": 8,
+    "start_offset_s": 0,
+    "loop": "cycle",
+    "route": [
+     {
+      "type": "waypoint",
+      "lng": -45.87308,
+      "lat": -23.22058,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "hold_s": 30,
+      "phase": "hold"
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8658157,
+      "lat": -23.2278654,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "speed_mps": 50
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8598722,
+      "lat": -23.2338262,
+      "height": {
+       "value": 30,
+       "datum": "AGL"
+      },
+      "speed_mps": 55
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8400606,
+      "lat": -23.2536954,
+      "height": {
+       "value": 1000,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8121317,
+      "lat": -23.2484577,
+      "height": {
+       "value": 1150,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8316082,
+      "lat": -23.1824677,
+      "height": {
+       "value": 1200,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "orbit",
+      "center": [
+       -45.8654125,
+       -23.1400393
+      ],
+      "radius_m": 1500,
+      "height": {
+       "value": 1200,
+       "datum": "MSL"
+      },
+      "turns": 1.5,
+      "start_bearing_deg": 90,
+      "clockwise": false
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8964827,
+      "lat": -23.1614902,
+      "height": {
+       "value": 1100,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8847813,
+      "lat": -23.1910351,
+      "height": {
+       "value": 870,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8820507,
+      "lat": -23.2088063,
+      "height": {
+       "value": 740,
+       "datum": "MSL"
+      },
+      "speed_mps": 60
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8777027,
+      "lat": -23.2159438,
+      "height": {
+       "value": 690,
+       "datum": "MSL"
+      },
+      "speed_mps": 58
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.87308,
+      "lat": -23.22058,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "speed_mps": 55
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8644949,
+      "lat": -23.22919,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "speed_mps": 30
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8644949,
+      "lat": -23.22919,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "hold_s": 10
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.87308,
+      "lat": -23.22058,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "speed_mps": 12
+     }
+    ],
+    "avoid_layer_ids": [
+     "zona-utm-dcta",
+     "volume-de-voo-speedbird",
+     "volume-de-voo-ita"
+    ],
+    "notes": "Departure RWY16, holding to the north, arrival from the north (340) and taxi back."
+   },
+   {
+    "id": "heli-1",
+    "kind": "helicopter",
+    "callsign": "PR-HEL1",
+    "speed_mps": 45,
+    "climb_mps": 5,
+    "start_offset_s": 0,
+    "loop": "pingpong",
+    "route": [
+     {
+      "type": "waypoint",
+      "lng": -45.87416666666699,
+      "lat": -23.194444444444,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "hold_s": 40,
+      "phase": "hold"
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.87416666666699,
+      "lat": -23.194444444444,
+      "height": {
+       "value": 60,
+       "datum": "AGL"
+      },
+      "phase": "takeoff"
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8697688,
+      "lat": -23.2014461,
+      "height": {
+       "value": 760,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8568901,
+      "lat": -23.2103246,
+      "height": {
+       "value": 760,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.848,
+      "lat": -23.205,
+      "height": {
+       "value": 740,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.838,
+      "lat": -23.189,
+      "height": {
+       "value": 740,
+       "datum": "MSL"
+      },
+      "hold_s": 5
+     }
+    ],
+    "avoid_layer_ids": [
+     "zona-utm-dcta",
+     "volume-de-voo-speedbird",
+     "volume-de-voo-ita"
+    ],
+    "notes": "SJCI -> Dutra crossing above Zona UTM (ceiling 680 m MSL)."
+   },
+   {
+    "id": "heli-2",
+    "kind": "helicopter",
+    "callsign": "PR-HEL2",
+    "speed_mps": 45,
+    "climb_mps": 5,
+    "start_offset_s": 90,
+    "loop": "pingpong",
+    "route": [
+     {
+      "type": "waypoint",
+      "lng": -45.87416666666699,
+      "lat": -23.194444444444,
+      "height": {
+       "value": 0,
+       "datum": "AGL"
+      },
+      "hold_s": 30,
+      "phase": "hold"
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.87416666666699,
+      "lat": -23.194444444444,
+      "height": {
+       "value": 60,
+       "datum": "AGL"
+      },
+      "phase": "takeoff"
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8711313,
+      "lat": -23.2048569,
+      "height": {
+       "value": 790,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.86,
+      "lat": -23.214,
+      "height": {
+       "value": 790,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.848,
+      "lat": -23.205,
+      "height": {
+       "value": 760,
+       "datum": "MSL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.838,
+      "lat": -23.189,
+      "height": {
+       "value": 760,
+       "datum": "MSL"
+      },
+      "hold_s": 5
+     }
+    ],
+    "avoid_layer_ids": [
+     "zona-utm-dcta",
+     "volume-de-voo-speedbird",
+     "volume-de-voo-ita"
+    ],
+    "notes": "SJCI -> overflight of DCTA -> Dutra."
+   }
+  ]
+ }
+}
