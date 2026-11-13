@@ -3,7 +3,7 @@
  "name": "Sandbox UTM DCTA (Sim)",
  "description": "Sandbox UTM DCTA with simulated drones, planes and helicopters.",
  "geoid_undulation_m": null,
- "created_at": "2026-11-12T18:59:10.458060Z",
+ "created_at": "2026-11-12T19:03:40.852721Z",
  "layers": [],
  "base_scenario_id": "dcta-sandbox-v2",
  "simulation": {
@@ -815,41 +815,42 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8951226,
-      "lat": -23.1608122,
+      "lng": -45.8776836,
+      "lat": -23.1572592,
       "height": {
-       "value": 1100,
+       "value": 1000,
        "datum": "MSL"
       }
      },
      {
       "type": "waypoint",
-      "lng": -45.8834213,
-      "lat": -23.1903571,
+      "lng": -45.8747018,
+      "lat": -23.1885806,
       "height": {
-       "value": 870,
-       "datum": "MSL"
-      }
-     },
-     {
-      "type": "waypoint",
-      "lng": -45.8806907,
-      "lat": -23.2081283,
-      "height": {
-       "value": 740,
+       "value": 820,
        "datum": "MSL"
       },
       "speed_mps": 60
      },
      {
       "type": "waypoint",
-      "lng": -45.8765561,
-      "lat": -23.2154535,
+      "lng": -45.873423,
+      "lat": -23.207871,
       "height": {
-       "value": 690,
+       "value": 715,
        "datum": "MSL"
       },
-      "speed_mps": 58
+      "speed_mps": 55
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8748289,
+      "lat": -23.2170423,
+      "height": {
+       "value": 675,
+       "datum": "MSL"
+      },
+      "speed_mps": 52
      },
      {
       "type": "waypoint",
@@ -897,7 +898,8 @@
      "volume-de-voo-speedbird",
      "volume-de-voo-ita"
     ],
-    "notes": "Departure RWY16, holding to the north, arrival from the north (340) and taxi back."
+    "turn_radius_m": 250,
+    "notes": "Departure, holding to the north, extreme arrival low over the UTM zone with a tight turn to a short final, taxi back."
    },
    {
     "id": "heli-1",
