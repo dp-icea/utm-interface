@@ -420,51 +420,6 @@
     "notes": "Survey of Area B through Corredor A."
    },
    {
-    "id": "ita-3",
-    "kind": "drone",
-    "callsign": "ITA-3",
-    "speed_mps": 8,
-    "climb_mps": 2.5,
-    "start_offset_s": 7,
-    "loop": "pingpong",
-    "route": [
-     {
-      "type": "waypoint",
-      "lng": -45.8772789,
-      "lat": -23.2079645,
-      "height": {
-       "value": 0,
-       "datum": "AGL"
-      },
-      "hold_s": 15,
-      "phase": "hold"
-     },
-     {
-      "type": "waypoint",
-      "lng": -45.8772789,
-      "lat": -23.2079645,
-      "height": {
-       "value": 25,
-       "datum": "AGL"
-      },
-      "phase": "takeoff"
-     },
-     {
-      "type": "waypoint",
-      "lng": -45.8763892,
-      "lat": -23.2087708,
-      "height": {
-       "value": 25,
-       "datum": "AGL"
-      },
-      "hold_s": 5
-     }
-    ],
-    "conformance_volume_ids": [
-     "arena-dcta-ita-area-ita-1"
-    ]
-   },
-   {
     "id": "plane-1",
     "kind": "plane",
     "callsign": "PT-SIM1",
