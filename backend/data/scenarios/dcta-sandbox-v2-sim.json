@@ -19,8 +19,8 @@
     "route": [
      {
       "type": "waypoint",
-      "lng": -45.8809353871855,
-      "lat": -23.19926637559486,
+      "lng": -45.880935,
+      "lat": -23.199266,
       "height": {
        "value": 0,
        "datum": "AGL"
@@ -30,8 +30,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8809353871855,
-      "lat": -23.19926637559486,
+      "lng": -45.880935,
+      "lat": -23.199266,
       "height": {
        "value": 40,
        "datum": "AGL"
@@ -40,8 +40,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8797,
-      "lat": -23.1995,
+      "lng": -45.880262,
+      "lat": -23.198958,
       "height": {
        "value": 40,
        "datum": "AGL"
@@ -49,8 +49,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8784,
-      "lat": -23.2003,
+      "lng": -45.87835,
+      "lat": -23.2007,
       "height": {
        "value": 40,
        "datum": "AGL"
@@ -58,8 +58,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8771,
-      "lat": -23.2006,
+      "lng": -45.876734,
+      "lat": -23.202195,
       "height": {
        "value": 40,
        "datum": "AGL"
@@ -67,8 +67,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8757,
-      "lat": -23.2004,
+      "lng": -45.877114,
+      "lat": -23.203337,
       "height": {
        "value": 40,
        "datum": "AGL"
@@ -76,8 +76,17 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8757,
-      "lat": -23.2004,
+      "lng": -45.876124,
+      "lat": -23.204196,
+      "height": {
+       "value": 40,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.876124,
+      "lat": -23.204196,
       "height": {
        "value": 0,
        "datum": "AGL"
