@@ -40,8 +40,8 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8766878360242,
-      "lat": -23.20538849148114,
+      "lng": -45.8797,
+      "lat": -23.1995,
       "height": {
        "value": 40,
        "datum": "AGL"
@@ -49,8 +49,35 @@
      },
      {
       "type": "waypoint",
-      "lng": -45.8766878360242,
-      "lat": -23.20538849148114,
+      "lng": -45.8784,
+      "lat": -23.2003,
+      "height": {
+       "value": 40,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8771,
+      "lat": -23.2006,
+      "height": {
+       "value": 40,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8757,
+      "lat": -23.2004,
+      "height": {
+       "value": 40,
+       "datum": "AGL"
+      }
+     },
+     {
+      "type": "waypoint",
+      "lng": -45.8757,
+      "lat": -23.2004,
       "height": {
        "value": 0,
        "datum": "AGL"
